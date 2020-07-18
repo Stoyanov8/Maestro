@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Refit.HttpClientFactory" Version="5.1.67" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Maestro.Core\Maestro.Core.csproj" />
+    <ProjectReference Include="..\..\Server\Server.Core\Server.Core.csproj" />
+  </ItemGroup>
+</Project>
