@@ -1,8 +1,8 @@
 ﻿namespace Core.Data.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
-    using Newtonsoft.Json;
 
     public class Message
     {

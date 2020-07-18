@@ -5,6 +5,6 @@
 
     public class AuthorizeAdministratorAttribute : AuthorizeAttribute
     {
-        public AuthorizeAdministratorAttribute() => Roles = Administrator;
+        public AuthorizeAdministratorAttribute() => Roles = AdministratorRole;
     }
 }

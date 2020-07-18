@@ -1,10 +1,9 @@
 ﻿namespace Core.Services
 {
+    using Core.Data.Models;
+    using Microsoft.EntityFrameworkCore;
     using System.Linq;
     using System.Threading.Tasks;
-    using Core.Data.Models;
-    using Data.Models;
-    using Microsoft.EntityFrameworkCore;
 
     public abstract class DataService<TEntity> : IDataService<TEntity>
         where TEntity : class

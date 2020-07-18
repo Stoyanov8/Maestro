@@ -1,4 +1,4 @@
-﻿namespace Identity.Models
+﻿namespace Client.Models.Identity
 {
     public class UserOutputModel
     {

@@ -10,6 +10,5 @@
         Task<Result<User>> Register(UserRegisterModel userInput);
 
         Task<Result<UserOutputModel>> Login(UserBaseInputModel userInput);
-
     }
 }

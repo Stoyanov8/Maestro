@@ -2,6 +2,7 @@
 {
     public static class Roles
     {
-        public const string Administrator = "Administrator";
+        public const string AdministratorRole = "Administrator";
+        public const string EmployeeRole = "Employee";
     }
 }

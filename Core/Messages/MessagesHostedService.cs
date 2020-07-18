@@ -1,13 +1,13 @@
 ﻿namespace Core.Messages
 {
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
     using Data.Models;
     using Hangfire;
     using MassTransit;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Hosting;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     public class MessagesHostedService : IHostedService
     {

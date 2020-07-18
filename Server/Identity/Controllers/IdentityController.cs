@@ -1,11 +1,12 @@
-﻿using Core.Services.Identity;
-using Identity.Models;
+﻿using Identity.Models;
 using Identity.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace Identity.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class IdentityController : ControllerBase
     {
         private readonly IIdentityService _identityService;
@@ -16,7 +17,8 @@ namespace Identity.Controllers
             this._identityService = identityService;
         }
 
-        [HttpPost]    
+        [HttpPost]
+        [Route(nameof(Register))]
         public async Task<ActionResult<UserOutputModel>> Register(UserRegisterModel input)
         {
             var result = await this._identityService.Register(input);
@@ -30,6 +32,7 @@ namespace Identity.Controllers
         }
 
         [HttpPost]
+        [Route(nameof(Login))]
         public async Task<ActionResult<UserOutputModel>> Login(UserBaseInputModel input)
         {
             var result = await this._identityService.Login(input);

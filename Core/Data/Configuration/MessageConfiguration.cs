@@ -1,10 +1,9 @@
 ﻿namespace Core.Data.Configuration
 {
-    using System;
     using Core.Data.Models;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
-    using Models;
+    using System;
 
     public class MessageConfiguration : IEntityTypeConfiguration<Message>
     {

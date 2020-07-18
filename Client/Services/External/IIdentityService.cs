@@ -1,4 +1,4 @@
-﻿using Identity.Models;
+﻿using Client.Models.Identity;
 using Refit;
 using System.Threading.Tasks;
 
@@ -8,5 +8,8 @@ namespace Client.Services.External
     {
         [Post("/Identity/Login")]
         Task<UserOutputModel> Login([Body] UserBaseInputModel loginInput);
+
+        [Post("/Identity/Register")]
+        Task<UserOutputModel> Register([Body] UserBaseInputModel registerInput);
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace Core.Infrastructure
 {
+    using Core.Services;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.EntityFrameworkCore;
@@ -44,12 +45,12 @@
 
             db.Database.Migrate();
 
-            //var seeders = serviceProvider.GetServices<IDataSeeder>();
+            var seeders = serviceProvider.GetServices<IDataSeeder>();
 
-            //foreach (var seeder in seeders)
-            //{
-            //    seeder.SeedData();
-            //}
+            foreach (var seeder in seeders)
+            {
+                seeder.SeedData();
+            }
 
             return app;
         }

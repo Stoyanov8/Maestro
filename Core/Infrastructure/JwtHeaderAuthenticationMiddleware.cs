@@ -1,11 +1,10 @@
 ﻿namespace Core.Infrastructure
 {
-    using System.Linq;
-    using System.Threading.Tasks;
-    using Services.Identity;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Http;
-
+    using Services.Identity;
+    using System.Linq;
+    using System.Threading.Tasks;
     using static InfrastructureConstants;
 
     public class JwtHeaderAuthenticationMiddleware : IMiddleware

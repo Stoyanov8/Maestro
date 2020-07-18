@@ -1,10 +1,9 @@
 ﻿namespace Core.Data
 {
-    using System.Reflection;
     using Configuration;
     using Core.Data.Models;
     using Microsoft.EntityFrameworkCore;
-    using Models;
+    using System.Reflection;
 
     public abstract class MessageDbContext : DbContext
     {
