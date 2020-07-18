@@ -1,13 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Client.Infrastructure;
+using Client.Models;
+using Client.Services.External;
+using Core.Infrastructure;
+using Core.Services.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Refit;
+using System.Reflection;
 
 namespace Client
 {
@@ -23,6 +26,22 @@ namespace Client
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var serviceEndpoints = this.Configuration
+                  .GetSection(nameof(ServiceEndpoints))
+                  .Get<ServiceEndpoints>(config => config.BindNonPublicProperties = true);
+
+            services
+                .AddAutoMapperProfile(Assembly.GetExecutingAssembly())
+                .AddTokenAuthentication(this.Configuration)
+                .AddScoped<ICurrentTokenService, CurrentTokenService>()
+                .AddTransient<JwtCookieAuthenticationMiddleware>()
+                .AddControllersWithViews(options => options
+                    .Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
+
+            services
+                .AddRefitClient<IIdentityService>()
+                .WithConfiguration(serviceEndpoints.Identity);
+
             services.AddControllersWithViews();
         }
 
@@ -31,27 +50,23 @@ namespace Client
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app
+                    .UseDeveloperExceptionPage();
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                app
+                    .UseExceptionHandler("/Home/Error")
+                    .UseHsts();
             }
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
 
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app
+                .UseHttpsRedirection()
+                .UseStaticFiles()
+                .UseRouting()
+                .UseJwtCookieAuthentication()
+                .UseAuthorization()
+                .UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
         }
     }
 }
