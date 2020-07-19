@@ -27,6 +27,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maestro.Requests", "Server\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maestro.Requests.Gateway", "Server\Requests\Maestro.Requests.Gateway\Maestro.Requests.Gateway.csproj", "{79FFA2E1-F603-4002-BF5F-9EC2820BF243}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maestro.Employees", "Server\Employees\Maestro.Employees\Maestro.Employees.csproj", "{077DB94E-008A-49AF-9FE1-C000A88D5963}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Employees", "Employees", "{29257510-A7E2-4DB7-B7D0-2478CD2D9ED2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +61,10 @@ Global
 		{79FFA2E1-F603-4002-BF5F-9EC2820BF243}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79FFA2E1-F603-4002-BF5F-9EC2820BF243}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79FFA2E1-F603-4002-BF5F-9EC2820BF243}.Release|Any CPU.Build.0 = Release|Any CPU
+		{077DB94E-008A-49AF-9FE1-C000A88D5963}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{077DB94E-008A-49AF-9FE1-C000A88D5963}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{077DB94E-008A-49AF-9FE1-C000A88D5963}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{077DB94E-008A-49AF-9FE1-C000A88D5963}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +79,8 @@ Global
 		{853705BA-F48C-42E1-A627-22EDFC09B43C} = {1F002A81-1B51-4B68-A927-6C19304848E5}
 		{4F9B12F8-8AB7-49FC-8E12-C7567FF775D6} = {BD3AC8C9-71E6-43F4-89E5-0126C4AA0F18}
 		{79FFA2E1-F603-4002-BF5F-9EC2820BF243} = {BD3AC8C9-71E6-43F4-89E5-0126C4AA0F18}
+		{077DB94E-008A-49AF-9FE1-C000A88D5963} = {29257510-A7E2-4DB7-B7D0-2478CD2D9ED2}
+		{29257510-A7E2-4DB7-B7D0-2478CD2D9ED2} = {24682B1F-8769-46A4-AD48-DF83FAD105AF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {401DA4EE-7D0E-42A1-88C4-60F8A28BE457}
