@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Requests.Migrations
+namespace Maestro.Requests.Migrations
 {
     public partial class RequestAndCategories : Migration
     {

@@ -30,6 +30,7 @@
                 UserName = userInput.Email,
                 FirstName = userInput.FirstName,
                 LastName = userInput.LastName,
+                PhoneNumber = userInput.PhoneNumber
             };
 
             var identityResult = await userManager.CreateAsync(user, userInput.Password);

@@ -10,6 +10,6 @@ namespace Client.Services.External
         Task<UserOutputModel> Login([Body] UserBaseInputModel loginInput);
 
         [Post("/Identity/Register")]
-        Task<UserOutputModel> Register([Body] UserBaseInputModel registerInput);
+        Task<UserOutputModel> Register([Body] UserRegisterModel registerInput);
     }
 }

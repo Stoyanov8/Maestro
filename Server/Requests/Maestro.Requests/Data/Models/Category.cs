@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Requests.Data.Model
+namespace Maestro.Requests.Data.Models
 {
     public class Category
     {

@@ -1,0 +1,20 @@
+﻿@using Maestro.Client.Models.Request;
+@model RequestInputModel
+
+
+<form asp-action="New" asp-controller="Requests">
+    <div class="form-group">
+        <label>Describe your issue and how we can help you</label>
+        <textarea class="form-control" asp-for="Description" rows="5"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Categorize your problem</label>
+        <select asp-for="CategoryId" class="form-control" id="exampleFormControlSelect1" 
+                asp-items="@Model.Categories.Select(x=> new SelectListItem { Text = x.Name, Value = x.Id })">
+            <option disabled value="@string.Empty">Select category..</option>
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Send enquiry</button>
+</form>

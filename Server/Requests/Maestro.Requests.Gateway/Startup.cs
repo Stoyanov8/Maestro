@@ -38,9 +38,9 @@ namespace Requests.Gateway
                 .AddTransient<JwtHeaderAuthenticationMiddleware>()
                 .AddControllers();
 
-            //services
-            //    .AddRefitClient<IRequestService>()
-            //    .WithConfiguration(serviceEndpoints.Requests);
+           //services
+           //    .AddRefitClient<IRequestService>()
+           //    .WithConfiguration(serviceEndpoints.Requests);
            
         }
 

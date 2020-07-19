@@ -1,11 +1,10 @@
 ﻿using Core.Services;
-using Requests.Data;
-using Requests.Data.Model;
+using Maestro.Requests.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Requests.Services
+namespace Maestro.Requests.Services.Seeders
 {
     public class CategoryDataSeeder : IDataSeeder
     {
@@ -25,9 +24,9 @@ namespace Requests.Services
 
             Task.Run(async () =>
             {
-                var categories = categoryList.Select(c => new Category() { Name = c });
+                var categories = categoryList.Select(c => new Data.Models.Category() { Name = c });
 
-                await _context.AddRangeAsync(categories);
+                await _context.Categories.AddRangeAsync(categories);
 
                 await _context.SaveChangesAsync();
 

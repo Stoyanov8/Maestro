@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Requests.Data.Model;
+﻿using Maestro.Requests.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
-namespace Requests.Data
+namespace Maestro.Requests.Data
 {
     public class RequestDbContext : DbContext
     {

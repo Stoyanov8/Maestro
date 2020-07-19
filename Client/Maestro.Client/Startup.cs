@@ -43,6 +43,11 @@ namespace Client
                 .AddRefitClient<IIdentityService>()
                 .WithConfiguration(serviceEndpoints.Identity);
 
+            services
+              .AddRefitClient<IRequestService>()
+              .WithConfiguration(serviceEndpoints.Requests);
+
+
             services.AddControllersWithViews();
         }
 

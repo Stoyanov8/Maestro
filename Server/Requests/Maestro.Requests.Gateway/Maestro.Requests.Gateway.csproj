@@ -3,10 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Refit.HttpClientFactory" Version="5.1.67" />
   </ItemGroup>

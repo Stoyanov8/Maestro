@@ -7,7 +7,5 @@ namespace Maestro.Requests.Models
         public string Description { get; set; }
 
         public string CategoryId { get; set; }
-
-        public string IssuerId { get; set; }
     }
 }

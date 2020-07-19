@@ -1,14 +1,16 @@
 using Core.Infrastructure;
 using Core.Services;
-using Maestro.Requests.Services;
+using Maestro.Requests.Data;
+using Maestro.Requests.Data.Models;
+using Maestro.Requests.Services.Category;
+using Maestro.Requests.Services.Requests;
+using Maestro.Requests.Services.Seeders;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Requests.Data;
-using Requests.Services;
 
-namespace Requests
+namespace Maestro.Requests
 {
     public class Startup
     {
@@ -23,7 +25,9 @@ namespace Requests
           => services
               .AddWebService<RequestDbContext>(this.Configuration)
               .AddTransient<IDataSeeder, CategoryDataSeeder>()
-              .AddTransient<IRequestService, RequestService>();
+              .AddTransient<IDataSeeder, RequestDataSeeder>()
+              .AddTransient<IRequestService, RequestService>()
+              .AddTransient<ICategoryService, CategoryService>();
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
             => app
