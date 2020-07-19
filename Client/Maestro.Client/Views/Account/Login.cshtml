@@ -1,6 +1,7 @@
 ﻿@model UserBaseInputModel
 
 <form asp-action="Login" asp-controller="Account">
+    <div asp-validation-summary="All"></div>
     <div class="form-group">
         <label>Email</label>
         <input asp-for="Email" type="email" class="form-control col-6" aria-describedby="emailHelp" placeholder="Email">

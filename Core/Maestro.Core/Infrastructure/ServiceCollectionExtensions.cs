@@ -1,9 +1,11 @@
-﻿namespace Core.Infrastructure
+﻿namespace Maestro.Core.Infrastructure
 {
     using AutoMapper;
-    using Core.Messages;
-    using Core.Models;
-    using Core.Services.Identity;
+    using global::Core;
+    using global::Core.Infrastructure;
+    using global::Core.Messages;
+    using global::Core.Models;
+    using global::Core.Services.Identity;
     using GreenPipes;
     using Hangfire;
     using MassTransit;
@@ -26,7 +28,7 @@
             services
                 .AddDatabase<TDbContext>(configuration)
                 .AddApplicationSettings(configuration)
-                .AddTokenAuthentication(configuration)
+                .AddTokenAuthentication(configuration)               
                 .AddAutoMapperProfile(Assembly.GetCallingAssembly())
                 .AddControllers();
 
@@ -105,6 +107,21 @@
                     (_, config) => config
                         .AddProfile(new MappingProfile(assembly)),
                     Array.Empty<Assembly>());
+
+        //public static IServiceCollection AddHealth(
+        //    this IServiceCollection services,
+        //    IConfiguration configuration)
+        //{
+        //    var healthChecks = services.AddHealthChecks();
+
+        //    healthChecks
+        //        .AddSqlServer(configuration.GetDefaultConnectionString());
+
+        //    healthChecks
+        //        .AddRabbitMQ(rabbitConnectionString: "amqp://rabbitmq:rabbitmq@rabbitmq/");
+
+        //    return services;
+        //}
 
         public static IServiceCollection AddMessaging(
             this IServiceCollection services,

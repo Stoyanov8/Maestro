@@ -8,7 +8,10 @@ namespace Core.Models
     public class Result
     {
         private readonly List<string> errors;
+        public Result()
+        {
 
+        }
         internal Result(bool succeeded, List<string> errors)
         {
             this.Succeeded = succeeded;

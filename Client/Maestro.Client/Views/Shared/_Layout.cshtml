@@ -6,6 +6,8 @@
     <title>Maestro</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/888fc36dbd.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -18,27 +20,43 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
+                        @if (User.IsInRole(Roles.AdministratorRole))
+                        {
+                            <div class="dropdown">
+                                <button class="btn btn-info dropdown-toggle"
+                                        type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Admin panel
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" asp-action="Index" asp-area="Admin" asp-controller="Users">Users</a>
+                                    <a class="dropdown-item" asp-action="Index" asp-area="Admin" asp-controller="Statistics">Statistics</a>
+                                    <a class="dropdown-item" asp-action="Index" asp-area="Admin" asp-controller="Requests">Requests</a>
+                                </div>
+                            </div>
+                        }
+
                         @if (!User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Register</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Requests" asp-action="New">New request</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Requests" asp-action="New">New request</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Requests" asp-action="Mine">Mine requests</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Requests" asp-action="Mine">Mine requests</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout">Logout</a>
+                            <li class="nav-item justify-content-end">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
                             </li>
                         }
+
                     </ul>
                 </div>
             </div>
@@ -52,6 +70,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

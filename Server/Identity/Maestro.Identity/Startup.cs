@@ -3,6 +3,7 @@ using Core.Services;
 using Identity.Data;
 using Identity.Infrastructure;
 using Identity.Services;
+using Maestro.Core.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

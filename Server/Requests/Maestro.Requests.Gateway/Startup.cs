@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Core.Infrastructure;
 using Core.Models;
+using Maestro.Core.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;

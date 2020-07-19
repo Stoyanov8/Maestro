@@ -2,6 +2,7 @@
 using Maestro.Requests.Models;
 using Maestro.Requests.Services.Category;
 using Maestro.Requests.Services.Requests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -42,6 +43,7 @@ namespace Maestro.Requests.Controllers
 
         [HttpGet]
         [Route(nameof(GetCurrentUserRequests))]
+        [Authorize]
         public async Task<IEnumerable<RequestOutputModel>> GetCurrentUserRequests()
             => await _requestService.GetCurrentUserRequests();
     }
