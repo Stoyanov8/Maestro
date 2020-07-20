@@ -2,8 +2,8 @@
 using Core.Models;
 using Core.Services;
 using Core.Services.Identity;
+using Maestro.Core.Enums;
 using Maestro.Employees.Data.Models;
-using Maestro.Employees.Enums;
 using Maestro.Employees.Models;
 using Maestro.Requests.Data;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +19,6 @@ namespace Maestro.Employees.Services
         private readonly IMapper _mapper;
         private readonly ICurrentUserService _currentUserService;
         private readonly EmployeesDbContext _context;
-
 
         public EmployeeService(EmployeesDbContext context,
             IMapper mapper,
@@ -82,7 +81,7 @@ namespace Maestro.Employees.Services
             var work = new Work()
             {
                 RequestId = input.RequestId,
-                Status = Enums.WorkStatus.Pending
+                Status = Core.Enums.WorkStatus.Pending
             };
 
             await this._context.Work.AddAsync(work);
@@ -90,8 +89,15 @@ namespace Maestro.Employees.Services
             await this._context.SaveChangesAsync();
         }
 
-        private async Task<Employee> GetCurrentEmployee()    
-            => await All().Include(x => x.Work)     
+        private async Task<Employee> GetCurrentEmployee()
+            => await All().Include(x => x.Work)
             .FirstOrDefaultAsync(x => x.UserId == _currentUserService.UserId);
+
+        public async Task<Result<WorkListOutputModel>> AvailableWork()
+        {
+            var model = await _context.Work.Where(x => x.Status == WorkStatus.Pending).ToListAsync();
+
+            return new WorkListOutputModel { Work = _mapper.Map<IEnumerable<Work>, IEnumerable<WorkOutputModel>>(model ?? Enumerable.Empty<Work>()) };
+        }
     }
 }

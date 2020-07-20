@@ -1,4 +1,4 @@
-﻿using Maestro.Employees.Enums;
+﻿using Maestro.Core.Enums;
 using System;
 
 namespace Maestro.Employees.Data.Models

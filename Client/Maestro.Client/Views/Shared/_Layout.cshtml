@@ -34,7 +34,19 @@
                                 </div>
                             </div>
                         }
-
+                        @if (User.IsInRole(Roles.EmployeeRole))
+                        {
+                            <div class="dropdown">
+                                <button class="btn btn-info dropdown-toggle"
+                                        type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                   Employee panel
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" asp-action="Available" asp-area="Employee" asp-controller="Work">Available work</a>
+                                    <a class="dropdown-item" asp-action="Mine" asp-area="Employee" asp-controller="Work">My Work</a>
+                                </div>
+                            </div>
+                        }
                         @if (!User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">

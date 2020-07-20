@@ -1,4 +1,5 @@
 ﻿using Core.Models;
+using Maestro.Client.Areas.Employee.Models;
 using Maestro.Client.Models.Employee;
 using Microsoft.AspNetCore.Mvc;
 using Refit;
@@ -9,13 +10,17 @@ namespace Maestro.Client.Services.External
     public interface IEmployeeService
     {
 
-        [Get("/Employee/MyWork")]
+        [Get("/Work/MyWork")]
         Task<EmployeeWorkOutputModel> MyWork();
 
-        [Post("/Request/GetCategories")]
+        [Get("/Work/AvailableWork")]
+        Task<ActionResult<WorkListOutputModel>> AvailableWork();
+
+
+        [Post("/Work/TakeWork")]
         Task<Result> TakeWork([Body] TakeWorkInputModel work);
 
-        [Post("/Employee/CloseWork")]
+        [Post("/Work/CloseWork")]
         Task<Result> CloseWork([Body] WorkInputModel work);
     }
 }

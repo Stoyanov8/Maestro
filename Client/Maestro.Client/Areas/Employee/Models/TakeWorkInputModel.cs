@@ -2,6 +2,6 @@
 {
     public class TakeWorkInputModel
     {
-        public string RequestId { get; set; }
+        public string Id { get; set; }
     }
 }
