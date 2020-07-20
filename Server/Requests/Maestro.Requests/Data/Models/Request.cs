@@ -12,6 +12,8 @@ namespace Maestro.Requests.Data.Models
         // User Id
         public string IssuerId { get; set; }
 
+        public bool IsActive { get; set; }
+
         public Category Category { get; set; }
 
         public string CategoryId { get; set; }

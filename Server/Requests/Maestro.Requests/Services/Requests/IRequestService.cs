@@ -10,5 +10,9 @@ namespace Maestro.Requests.Services.Requests
     {
         Task<Result> Create(RequestInputModel model);
         Task<IEnumerable<RequestOutputModel>> GetCurrentUserRequests();
+
+        Task<IEnumerable<RequestOutputModel>> RequestsIn(RequestsInIdsInputModel input);
+
+
     }
 }

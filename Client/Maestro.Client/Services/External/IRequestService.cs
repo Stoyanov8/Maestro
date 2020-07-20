@@ -18,5 +18,8 @@ namespace Client.Services.External
 
         [Get("/Request/GetCurrentUserRequests")]
         Task<IEnumerable<RequestOutputModel>> GetCurrentUserRequests();
+
+        [Get("/Request/GetAllIn")]
+        Task<IEnumerable<RequestOutputModel>> GetAllIn([Body]RequestsByIdsInputModel model);
     }
 }

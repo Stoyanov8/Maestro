@@ -2,12 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Core.Infrastructure;
-using Core.Services;
-using Maestro.Core.Infrastructure;
-using Maestro.Employees.Services;
-using Maestro.Employees.Services.Seeders;
-using Maestro.Requests.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -17,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Maestro.Employees
+namespace Maestro.Employees.Gateway
 {
     public class Startup
     {
@@ -28,15 +22,30 @@ namespace Maestro.Employees
 
         public IConfiguration Configuration { get; }
 
+        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-          => services
-              .AddWebService<EmployeesDbContext>(this.Configuration)
-              .AddTransient<IDataSeeder, EmployeesDataSeeder>()
-              .AddTransient<IEmployeeService, EmployeeService>();
+        {
+            services.AddControllers();
+        }
 
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-            => app
-                .UseWebService(env)
-                .Initialize();
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            app.UseHttpsRedirection();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+        }
     }
 }

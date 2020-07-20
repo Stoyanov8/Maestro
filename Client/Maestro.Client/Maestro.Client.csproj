@@ -19,8 +19,4 @@
     <ProjectReference Include="..\..\Core\Maestro.Core\Maestro.Core.csproj" />
     <ProjectReference Include="..\..\Server\Server.Core\Server.Core.csproj" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Areas\Admin\Services\" />
-  </ItemGroup>
 </Project>

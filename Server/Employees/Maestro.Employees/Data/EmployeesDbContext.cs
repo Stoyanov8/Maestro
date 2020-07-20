@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Maestro.Employees.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 namespace Maestro.Requests.Data
@@ -9,6 +10,10 @@ namespace Maestro.Requests.Data
             : base(options)
         {
         }
+
+        public DbSet<Employee> Employees { get; set; }
+
+        public DbSet<Work> Work { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

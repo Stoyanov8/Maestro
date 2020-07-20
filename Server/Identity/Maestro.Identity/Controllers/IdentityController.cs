@@ -23,8 +23,9 @@ namespace Identity.Controllers
         [HttpPost]
         [Route(nameof(Register))]
         public async Task<ActionResult<UserOutputModel>> Register(UserRegisterModel input)
-        {
+        {            
             var result = await this._identityService.Register(input);
+
 
             if (!result.Succeeded)
             {

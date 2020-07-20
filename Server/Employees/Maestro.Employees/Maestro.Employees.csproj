@@ -23,11 +23,4 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Server.Core\Server.Core.csproj" />
   </ItemGroup>
-
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Data\Models\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
 </Project>

@@ -7,8 +7,10 @@ using Maestro.Requests.Data;
 using Maestro.Requests.Data.Models;
 using Maestro.Requests.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 using static Maestro.Core.Constants.ErrorMessages;
@@ -18,7 +20,7 @@ namespace Maestro.Requests.Services.Requests
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly IMapper _mapper;
-    
+
         public RequestService(ICurrentUserService currentUserService,
             RequestDbContext context,
             IMapper mapper)
@@ -53,10 +55,17 @@ namespace Maestro.Requests.Services.Requests
         }
 
         public async Task<IEnumerable<RequestOutputModel>> GetCurrentUserRequests()
+            => await GetRequestsByFilter(r => r.IssuerId == _currentUserService.UserId);
+
+        public async Task<IEnumerable<RequestOutputModel>> RequestsIn(RequestsInIdsInputModel input)        
+            => await GetRequestsByFilter(r => input.Ids.Contains(r.Id));
+
+        private async Task<IEnumerable<RequestOutputModel>> GetRequestsByFilter(Expression<Func<Request, bool>> filter)
         {
             var req = await All()
-                .Include(r=> r.Category)
-                .Where(r => r.IssuerId == _currentUserService.UserId).ToListAsync();
+                .Include(r => r.Category)
+                .Where(filter)
+                .ToListAsync();
 
             return _mapper.Map<IEnumerable<Request>, IEnumerable<RequestOutputModel>>(req);
         }

@@ -9,6 +9,8 @@
 
         public string Requests { get; set; }
 
+        public string Employees { get; set; }
+
         public string this[string service]
             => GetType()
                 .GetProperties()

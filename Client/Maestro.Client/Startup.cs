@@ -4,6 +4,7 @@ using Client.Services.External;
 using Core.Infrastructure;
 using Core.Models;
 using Core.Services.Identity;
+using Maestro.Client.Services.External;
 using Maestro.Core.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -48,6 +49,9 @@ namespace Client
               .AddRefitClient<IRequestService>()
               .WithConfiguration(serviceEndpoints.Requests);
 
+            services
+       .AddRefitClient<IEmployeeService>()
+       .WithConfiguration(serviceEndpoints.Employees);
 
             services.AddControllersWithViews();
         }
@@ -76,7 +80,7 @@ namespace Client
                 .UseEndpoints(endpoints =>
                 {
                     endpoints.MapControllerRoute(
-                        name: "areas",                          
+                        name: "areas",
                         pattern: "{area}/{controller}/{action=Index}/{id?}");
 
                     endpoints.MapDefaultControllerRoute();

@@ -46,5 +46,9 @@ namespace Maestro.Requests.Controllers
         [Authorize]
         public async Task<IEnumerable<RequestOutputModel>> GetCurrentUserRequests()
             => await _requestService.GetCurrentUserRequests();
+
+
+        public async Task<IEnumerable<RequestOutputModel>> GetAllIn(RequestsInIdsInputModel model)
+            => await _requestService.RequestsIn(model);
     }
 }
