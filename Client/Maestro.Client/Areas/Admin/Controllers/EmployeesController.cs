@@ -8,10 +8,11 @@ namespace Maestro.Client.Areas.Admin.Controllers
     {
         private readonly IEmployeeGatewayService _employeeService;
 
-        public EmployeesController()
+        public EmployeesController(IEmployeeGatewayService employeeService)
         {
-
+            _employeeService = employeeService;
         }
+
         public async Task<IActionResult> Index()
         {
             var employees = await _employeeService.GetEmployees();

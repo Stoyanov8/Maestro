@@ -5,6 +5,7 @@
         <tr>
             <th scope="col">Description</th>
             <th scope="col">Category</th>
+            <th scope="col">Is Completed</th>
         </tr>
     </thead>
     <tbody>
@@ -13,6 +14,7 @@
             <tr>
                 <td>@m.Description</td>
                 <td>@m.CategoryName</td>
+                <td>@(m.IsActive ? "-" : "+")</td>
             </tr>
         }
     </tbody>

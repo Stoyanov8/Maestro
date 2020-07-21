@@ -4,9 +4,7 @@ using System.Text;
 namespace Maestro.Core.Extensions
 {
     public static class ExceptionExtensions
-    {
-
-        // TODO test 
+    {        
         public static string ReadException(this Exception ex)
         {
             var sb = new StringBuilder();

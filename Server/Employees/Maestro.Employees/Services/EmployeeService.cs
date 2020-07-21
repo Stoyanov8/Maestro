@@ -3,9 +3,11 @@ using Core.Models;
 using Core.Services;
 using Core.Services.Identity;
 using Maestro.Core.Enums;
+using Maestro.Core.Messages;
 using Maestro.Employees.Data.Models;
 using Maestro.Employees.Models;
 using Maestro.Requests.Data;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,15 +21,18 @@ namespace Maestro.Employees.Services
         private readonly IMapper _mapper;
         private readonly ICurrentUserService _currentUserService;
         private readonly EmployeesDbContext _context;
+        private readonly IBus _bus;
 
         public EmployeeService(EmployeesDbContext context,
             IMapper mapper,
-            ICurrentUserService currentUserService)
+            ICurrentUserService currentUserService,
+            IBus bus)
             : base(context)
         {
             _context = context;
             _mapper = mapper;
             _currentUserService = currentUserService;
+            _bus = bus;
         }
 
         public async Task<Result<EmployeeWorkOutputModel>> GetMyWork()
@@ -69,7 +74,9 @@ namespace Maestro.Employees.Services
 
             work.Status = WorkStatus.Completed;
 
-            await this._context.SaveChangesAsync();
+            await _bus.Publish(new RequestDoneMessage() { RequestId = work.RequestId });
+
+            //TODO another message to statistics microservice with parameters EmployeeId 
 
             return await this._context.SaveChangesAsync() > 0
                 ? Result.Success
@@ -92,6 +99,8 @@ namespace Maestro.Employees.Services
             var model = new List<EmployeeOutputModel>();
 
             var employees = await _context.Employees.Include(e => e.Work).ToListAsync();
+
+            
             return new EmployeesOutputModel()
             {
                 Employees = _mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeOutputModel>>(employees)

@@ -7,7 +7,7 @@ namespace Maestro.Client.Services.External
 {
     public interface IEmployeeGatewayService
     {
-        [Get("/Employee/GetEmployees")]
+        [Get("/Employees/GetEmployees")]
         Task<IEnumerable<EmployeeInformationOutputModel>> GetEmployees();
     }
 }

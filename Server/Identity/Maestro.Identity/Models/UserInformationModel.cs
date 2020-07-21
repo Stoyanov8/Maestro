@@ -12,7 +12,7 @@ namespace Maestro.Identity.Models
 
         public string LastName { get; set; }
 
-        void Mapping(Profile mapper)
+        public void Mapping(Profile mapper)
         {
             mapper.CreateMap<User, UserInformationModel>()
                .ForMember(x => x.UserId, c => c.MapFrom(b => b.Id));

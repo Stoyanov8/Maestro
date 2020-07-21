@@ -1,12 +1,10 @@
 ﻿using Maestro.Employees.Models;
 using Maestro.Employees.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Maestro.Employees.Controllers
 {
-
     public class EmployeeController : BaseController
     {
         private readonly IEmployeeService _employeeService;
@@ -16,6 +14,8 @@ namespace Maestro.Employees.Controllers
             _employeeService = employeeService;
         }
 
+        [HttpGet]
+        [Route(nameof(GetEmployees))]
         public async Task<ActionResult<EmployeesOutputModel>> GetEmployees()
         {
             return await _employeeService.GetEmployees();

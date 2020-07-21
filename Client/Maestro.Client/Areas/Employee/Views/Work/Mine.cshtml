@@ -23,11 +23,11 @@
                     <td>@m.CategoryName</td>
                     <td>@m.StatusText</td>
                     <td>
-                        <a type="button" class="btn btn-primary" asp-action="Close work"
+                        <a type="button" class="btn btn-primary" asp-action="CloseWork"
                            asp-controller="Work"
                            asp-route-workId="@m.Id"
                            title="Complete this work item">
-                            <i class="fas fa-briefcase"></i>
+                            <i class="fas fa-thumbs-up"></i>
                         </a>
                     </td>
                 </tr>

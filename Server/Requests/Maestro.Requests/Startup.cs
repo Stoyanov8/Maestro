@@ -1,6 +1,7 @@
 using Core.Infrastructure;
 using Core.Services;
 using Maestro.Core.Infrastructure;
+using Maestro.Requests.Consumers;
 using Maestro.Requests.Data;
 using Maestro.Requests.Data.Models;
 using Maestro.Requests.Services.Category;
@@ -29,7 +30,7 @@ namespace Maestro.Requests
             .AddTransient<IDataSeeder, RequestDataSeeder>()             
             .AddTransient<IRequestService, RequestService>()             
             .AddTransient<ICategoryService, CategoryService>()            
-            .AddMessaging(this.Configuration);
+            .AddMessaging(this.Configuration,typeof(RequestDoneConsumer));
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
             => app

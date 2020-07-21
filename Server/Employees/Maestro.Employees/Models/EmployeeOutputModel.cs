@@ -17,10 +17,11 @@ namespace Maestro.Employees.Models
 
         public string UserId { get; set; }
 
-        void Mapping(Profile mapper)
+        public void Mapping(Profile mapper)
         {
              mapper.CreateMap<Employee, EmployeeOutputModel>()
-                .ForMember(e=> e.CurrentWorkCount, e=> e.MapFrom(c=> c.Work.Count()));
+                .ForMember(e=> e.CurrentWorkCount, e=> e.MapFrom(c=> c.Work.Where(x=> x.Status ==Core.Enums.WorkStatus.InProgress)
+                .Count()));
         }
     }
 

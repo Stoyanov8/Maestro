@@ -43,7 +43,8 @@ namespace Maestro.Requests.Services.Requests
                 {
                     CategoryId = model.CategoryId,
                     Description = model.Description,
-                    IssuerId = _currentUserService.UserId
+                    IssuerId = _currentUserService.UserId,
+                    IsActive = true
                 };
 
                 await Data.AddAsync(req);

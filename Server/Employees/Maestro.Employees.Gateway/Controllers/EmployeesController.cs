@@ -2,12 +2,18 @@
 using Maestro.Employees.Gateway.Models.Employee;
 using Maestro.Employees.Gateway.Models.User;
 using Maestro.Employees.Gateway.Services.External;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using static Core.Constants.Roles;
+
+
 namespace Maestro.Employees.Gateway.Controllers
 {
+
     public class EmployeesController : ApiController
     {
         private readonly IEmployeeService _employeeService;
@@ -19,11 +25,14 @@ namespace Maestro.Employees.Gateway.Controllers
             _identityService = identityService;
         }
 
+        [Authorize(Roles = AdministratorRole)]
+        [HttpGet]
+        [Route(nameof(GetEmployees))]
         public async Task<IEnumerable<EmployeeInformationOutputModel>> GetEmployees()
         {
             var outputEmployees = await _employeeService.GetEmployees();
 
-            var userInfo = await _identityService.GetEmployees(new UsersIdInputModel { Ids = outputEmployees.Employees.Select(e => e.UserId) });
+            var userInfo = await _identityService.GetAllIn(new UsersIdInputModel { Ids = outputEmployees.Employees.Select(e => e.UserId) });
 
             var empdict = outputEmployees.Employees.ToDictionary(x => x.UserId);
 
