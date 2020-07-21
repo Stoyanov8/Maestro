@@ -21,8 +21,8 @@ namespace Client.Services.External
         Task<IEnumerable<UserListOutputModel>> All();
 
 
-        [Post("/Identity/AddToRole")]
-        Task<Result> AddToRole([Body] UserRoleInputModel userRole);
+        [Post("/Identity/PromoteToEmployee")]
+        Task<Result> PromoteToEmployee([Body] UserRoleInputModel userRole);
 
         [Get("/Identity/Delete")]        
         Task<Result> Delete([Query]string userId);

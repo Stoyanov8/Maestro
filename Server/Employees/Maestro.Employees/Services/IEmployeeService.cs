@@ -10,13 +10,13 @@ namespace Maestro.Employees.Services
     public interface IEmployeeService : IDataService<Employee>
     {
         Task<Result<EmployeeWorkOutputModel>> GetMyWork();
-
-        Task CreateWork(CreateWorkInputModel input);
-
+        
         Task<Result> TakeWork(TakeWorkInputModel input);
 
         Task<Result> CloseWork(WorkInputModel input);
 
         Task<Result<WorkListOutputModel>> AvailableWork();
+
+        Task<Result<EmployeesOutputModel>> GetEmployees();
     }
 }

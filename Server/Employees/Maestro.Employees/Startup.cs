@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Core.Infrastructure;
 using Core.Services;
 using Maestro.Core.Infrastructure;
+using Maestro.Core.Messages;
+using Maestro.Employees.Consumers;
 using Maestro.Employees.Services;
 using Maestro.Employees.Services.Seeders;
 using Maestro.Requests.Data;
@@ -32,7 +34,8 @@ namespace Maestro.Employees
           => services
               .AddWebService<EmployeesDbContext>(this.Configuration)
               .AddTransient<IDataSeeder, EmployeesDataSeeder>()
-              .AddTransient<IEmployeeService, EmployeeService>();
+              .AddTransient<IEmployeeService, EmployeeService>()
+              .AddMessaging(this.Configuration, typeof(UserPromotedConsumer), typeof(RequestCreatedConsumer));
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
             => app

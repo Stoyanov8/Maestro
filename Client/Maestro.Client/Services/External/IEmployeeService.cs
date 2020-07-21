@@ -14,7 +14,7 @@ namespace Maestro.Client.Services.External
         Task<EmployeeWorkOutputModel> MyWork();
 
         [Get("/Work/AvailableWork")]
-        Task<ActionResult<WorkListOutputModel>> AvailableWork();
+        Task<WorkListOutputModel> AvailableWork();
 
 
         [Post("/Work/TakeWork")]

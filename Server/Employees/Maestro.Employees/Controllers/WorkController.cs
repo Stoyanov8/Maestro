@@ -28,18 +28,16 @@ namespace Maestro.Employees.Controllers
 
 
         [HttpGet]
-        [Route(nameof(MyWork))]
+        [Route(nameof(AvailableWork))]
         public async Task<ActionResult<WorkListOutputModel>> AvailableWork()
              => await _employeeService.AvailableWork();
 
-        //TODO event
-        public async Task CreateWork([FromBody] CreateWorkInputModel work)
-           => await _employeeService.CreateWork(work);
+
 
         [HttpPost]
         [Route(nameof(TakeWork))]
         public async Task<ActionResult> TakeWork([FromBody] TakeWorkInputModel work)
-            => await _employeeService.TakeWork(work);
+             => await _employeeService.TakeWork(work);
 
         [HttpPost]
         [Route(nameof(CloseWork))]

@@ -4,6 +4,7 @@ using Identity.Data;
 using Identity.Infrastructure;
 using Identity.Services;
 using Maestro.Core.Infrastructure;
+using Maestro.Core.Messages;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,11 +23,13 @@ namespace Identity
 
         public void ConfigureServices(IServiceCollection services)
           => services
-              .AddWebService<IdentityDbContext>(this.Configuration)
-              .AddUserStorage()
-              .AddTransient<IIdentityService, IdentityService>()
-              .AddTransient<IDataSeeder, IdentitySeeder>()
-              .AddTransient<ITokenGeneratorService, TokenGeneratorService>();
+             
+            .AddWebService<IdentityDbContext>(this.Configuration)            
+            .AddUserStorage()             
+            .AddTransient<IIdentityService, IdentityService>()              
+            .AddTransient<IDataSeeder, IdentitySeeder>()            
+            .AddTransient<ITokenGeneratorService, TokenGeneratorService>()               
+            .AddMessaging(this.Configuration);
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
             => app

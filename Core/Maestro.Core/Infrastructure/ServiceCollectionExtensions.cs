@@ -108,6 +108,8 @@
                         .AddProfile(new MappingProfile(assembly)),
                     Array.Empty<Assembly>());
 
+
+
         //public static IServiceCollection AddHealth(
         //    this IServiceCollection services,
         //    IConfiguration configuration)
@@ -135,11 +137,7 @@
 
                     mt.AddBus(context => Bus.Factory.CreateUsingRabbitMq(rmq =>
                     {
-                        rmq.Host("rabbitmq", host =>
-                        {
-                            host.Username("rabbitmq");
-                            host.Password("rabbitmq");
-                        });
+                        rmq.Host("localhost");
 
                         rmq.UseHealthCheck(context);
 
@@ -163,7 +161,7 @@
 
             services.AddHangfireServer();
 
-            services.AddHostedService<MessagesHostedService>();
+            //services.AddHostedService<MessagesHostedService>();
 
             return services;
         }

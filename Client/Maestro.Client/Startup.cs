@@ -50,6 +50,10 @@ namespace Client
               .WithConfiguration(serviceEndpoints.Requests);
 
             services
+         .AddRefitClient<IEmployeeGatewayService>()
+         .WithConfiguration(serviceEndpoints.EmployeesGateway);
+
+            services
        .AddRefitClient<IEmployeeService>()
        .WithConfiguration(serviceEndpoints.Employees);
 

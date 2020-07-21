@@ -23,12 +23,13 @@ namespace Maestro.Requests
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
-          => services
-              .AddWebService<RequestDbContext>(this.Configuration)
-              .AddTransient<IDataSeeder, CategoryDataSeeder>()
-              .AddTransient<IDataSeeder, RequestDataSeeder>()
-              .AddTransient<IRequestService, RequestService>()
-              .AddTransient<ICategoryService, CategoryService>();
+          => services             
+            .AddWebService<RequestDbContext>(this.Configuration)             
+            .AddTransient<IDataSeeder, CategoryDataSeeder>()             
+            .AddTransient<IDataSeeder, RequestDataSeeder>()             
+            .AddTransient<IRequestService, RequestService>()             
+            .AddTransient<ICategoryService, CategoryService>()            
+            .AddMessaging(this.Configuration);
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
             => app

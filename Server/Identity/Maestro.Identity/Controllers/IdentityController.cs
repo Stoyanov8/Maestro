@@ -58,16 +58,19 @@ namespace Identity.Controllers
             =>  await this._identityService.GetAll();
         
 
-
         [HttpPost]
-        [Route(nameof(AddToRole))]
-        public async Task<Result> AddToRole(UserRoleInputModel input)
-            => await this._identityService.AddToRole(input);
+        [Route(nameof(PromoteToEmployee))]
+        public async Task<Result> PromoteToEmployee(UserRoleInputModel input)
+            => await this._identityService.PromoteToEmployee(input);
 
         [HttpGet]
         [Route(nameof(Delete))]
         public async Task<Result> Delete(string userId)
            => await this._identityService.Delete(userId);
 
+        [HttpPost]
+        [Route(nameof(GetAllIn))]
+        public async Task<IEnumerable<UserInformationModel>> GetAllIn(UsersIdInputModel model)      
+            => await _identityService.GetAllIn(model.Ids);
     }
 }

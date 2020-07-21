@@ -47,15 +47,16 @@ namespace Maestro.Employees.Services
 
             var work = await _context.Work.FirstOrDefaultAsync(w => w.Id == input.Id);
 
-            if (work.StartDate != null || string.IsNullOrEmpty(work.EmployeeId))
+            if (work.StartDate != null || !string.IsNullOrEmpty(work.EmployeeId))
             {
                 return Result.Failure("Work already taken");
             }
 
             work.StartDate = DateTime.Now;
-
             work.EmployeeId = employee.Id;
             work.Status = WorkStatus.InProgress;
+
+            await _context.SaveChangesAsync();
 
             return Result.Success;
         }
@@ -75,20 +76,6 @@ namespace Maestro.Employees.Services
                 : Result.Failure(InternalServerError);
         }
 
-        //TODO This is Intended to be executed when new requests comes in the system by a client
-        public async Task CreateWork(CreateWorkInputModel input)
-        {
-            var work = new Work()
-            {
-                RequestId = input.RequestId,
-                Status = Core.Enums.WorkStatus.Pending
-            };
-
-            await this._context.Work.AddAsync(work);
-
-            await this._context.SaveChangesAsync();
-        }
-
         private async Task<Employee> GetCurrentEmployee()
             => await All().Include(x => x.Work)
             .FirstOrDefaultAsync(x => x.UserId == _currentUserService.UserId);
@@ -98,6 +85,17 @@ namespace Maestro.Employees.Services
             var model = await _context.Work.Where(x => x.Status == WorkStatus.Pending).ToListAsync();
 
             return new WorkListOutputModel { Work = _mapper.Map<IEnumerable<Work>, IEnumerable<WorkOutputModel>>(model ?? Enumerable.Empty<Work>()) };
+        }
+
+        public async Task<Result<EmployeesOutputModel>> GetEmployees()
+        {
+            var model = new List<EmployeeOutputModel>();
+
+            var employees = await _context.Employees.Include(e => e.Work).ToListAsync();
+            return new EmployeesOutputModel()
+            {
+                Employees = _mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeOutputModel>>(employees)
+            };
         }
     }
 }

@@ -22,6 +22,7 @@ namespace Maestro.Employees.Migrations
             modelBuilder.Entity("Maestro.Employees.Data.Models.Employee", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("EmployeeSince")
@@ -38,6 +39,7 @@ namespace Maestro.Employees.Migrations
             modelBuilder.Entity("Maestro.Employees.Data.Models.Work", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("EmployeeId")

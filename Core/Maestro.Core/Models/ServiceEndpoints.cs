@@ -11,6 +11,8 @@
 
         public string Employees { get; set; }
 
+        public string EmployeesGateway { get; set; }
+
         public string this[string service]
             => GetType()
                 .GetProperties()

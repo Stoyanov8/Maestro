@@ -5,6 +5,7 @@
     using Data.Models;
     using Identity.Models;
     using Maestro.Identity.Models;
+    using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -16,8 +17,10 @@
 
         Task<IEnumerable<UserListOutputModel>> GetAll();
 
-        Task<Result> AddToRole(UserRoleInputModel input);
+        Task<Result> PromoteToEmployee(UserRoleInputModel input);
 
         Task<Result> Delete(string userId);
+
+        Task<IEnumerable<UserInformationModel>> GetAllIn(IEnumerable<string> ids);
     }
 }

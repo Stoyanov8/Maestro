@@ -1,7 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using Core.Infrastructure;
+using Core.Models;
+using Core.Services.Identity;
+using Maestro.Core.Infrastructure;
+using Maestro.Employees.Gateway.Services.External;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Refit;
 
 namespace Maestro.Employees.Gateway
 {
@@ -25,10 +32,26 @@ namespace Maestro.Employees.Gateway
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            var serviceEndpoints = this.Configuration
+                .GetSection(nameof(ServiceEndpoints))
+                .Get<ServiceEndpoints>(config => config.BindNonPublicProperties = true);
+
+            services
+                .AddAutoMapperProfile(Assembly.GetExecutingAssembly())
+                .AddTokenAuthentication(this.Configuration)
+                .AddScoped<ICurrentTokenService, CurrentTokenService>()
+                .AddTransient<JwtHeaderAuthenticationMiddleware>()
+                .AddControllers();
+
+            services
+                .AddRefitClient<IIdentityService>()
+                .WithConfiguration(serviceEndpoints.Identity);
+
+            services
+                .AddRefitClient<IEmployeeService>()
+                .WithConfiguration(serviceEndpoints.Employees);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -39,6 +62,8 @@ namespace Maestro.Employees.Gateway
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseJwtHeaderAuthentication();
 
             app.UseAuthorization();
 

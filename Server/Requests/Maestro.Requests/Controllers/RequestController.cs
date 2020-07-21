@@ -47,7 +47,8 @@ namespace Maestro.Requests.Controllers
         public async Task<IEnumerable<RequestOutputModel>> GetCurrentUserRequests()
             => await _requestService.GetCurrentUserRequests();
 
-
+        [HttpGet]
+        [Route(nameof(GetAllIn))]
         public async Task<IEnumerable<RequestOutputModel>> GetAllIn(RequestsInIdsInputModel model)
             => await _requestService.RequestsIn(model);
     }

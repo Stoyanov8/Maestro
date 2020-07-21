@@ -1,2 +1,44 @@
 ﻿@model IEnumerable<WorkViewModel>
 
+@if (Model.Count() > 0)
+{
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Description</th>
+                <th scope="col">Category</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+                var m = Model.ToList()[i];
+
+                <tr>
+                    <td>@i</td>
+                    <td>@m.Description</td>
+                    <td>@m.CategoryName</td>
+                    <td>@m.StatusText</td>
+                    <td>
+                        <a type="button" class="btn btn-primary" asp-action="Close work"
+                           asp-controller="Work"
+                           asp-route-workId="@m.Id"
+                           title="Complete this work item">
+                            <i class="fas fa-briefcase"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+
+    <h2>
+        No work here. Grab some from  <a type="button" class="btn btn-primary" asp-action="Available" asp-controller="Work">Here</a>
+    </h2>
+}

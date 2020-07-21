@@ -28,16 +28,9 @@ namespace Maestro.Client.Areas.Admin.Controllers
         public async Task<IActionResult> PromoteToEmployee(string userId)
         {
             var model = new UserRoleInputModel { UserId = userId, Role = EmployeeRole };
-            await _identityService.AddToRole(model);
+            await _identityService.PromoteToEmployee(model);
 
             return RedirectToAction(nameof(Index));
-        }
-
-        public async Task<IActionResult> Delete(string userId)
-        {
-            var result = await _identityService.Delete(userId);
-
-            return RedirectToAction(nameof(Index));
-        }
+        }      
     }
 }
