@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Maestro.Core.Messages;
+﻿using Core.Services.Messages;
 using Maestro.Requests.Data;
 using MassTransit;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Maestro.Requests.Consumers
 {

@@ -12,5 +12,7 @@ namespace Maestro.Employees.Gateway.Models.Employee
         public DateTime EmployeeSince { get; set; }
 
         public int CurrentWorkCount { get; set; }
+
+        public long AverageTime { get; set; }
     }
 }

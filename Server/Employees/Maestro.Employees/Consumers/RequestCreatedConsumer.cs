@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using Core.Services.Messages;
 using Maestro.Core.Enums;
-using Maestro.Core.Messages;
 using Maestro.Employees.Data.Models;
 using Maestro.Requests.Data;
 using MassTransit;
+using System.Threading.Tasks;
 
 namespace Maestro.Employees.Consumers
 {

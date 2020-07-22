@@ -5,15 +5,13 @@ namespace Identity.Services
     using AutoMapper;
     using Core.Models;
     using Core.Services;
+    using Core.Services.Messages;
     using Data.Models;
     using Identity.Data;
     using Identity.Models;
-    using Maestro.Core.Extensions;
-    using Maestro.Core.Messages;
     using Maestro.Identity.Models;
     using MassTransit;
     using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
     using System.Linq;

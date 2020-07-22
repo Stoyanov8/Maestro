@@ -31,6 +31,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Employees", "Employees", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maestro.Employees.Gateway", "Server\Employees\Maestro.Employees.Gateway\Maestro.Employees.Gateway.csproj", "{F3A45E1F-8427-4ABC-8ED2-064B8D5EF9ED}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Statistics", "Statistics", "{BC31D11C-3073-4353-94BC-B33FB0024E7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maestro.Statistics", "Server\Statistics\Maestro.Statistics\Maestro.Statistics.csproj", "{E29605BF-BC5A-4EE9-B235-77BBD82B81BB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +69,10 @@ Global
 		{F3A45E1F-8427-4ABC-8ED2-064B8D5EF9ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3A45E1F-8427-4ABC-8ED2-064B8D5EF9ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3A45E1F-8427-4ABC-8ED2-064B8D5EF9ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E29605BF-BC5A-4EE9-B235-77BBD82B81BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E29605BF-BC5A-4EE9-B235-77BBD82B81BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E29605BF-BC5A-4EE9-B235-77BBD82B81BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E29605BF-BC5A-4EE9-B235-77BBD82B81BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,6 +89,8 @@ Global
 		{077DB94E-008A-49AF-9FE1-C000A88D5963} = {29257510-A7E2-4DB7-B7D0-2478CD2D9ED2}
 		{29257510-A7E2-4DB7-B7D0-2478CD2D9ED2} = {24682B1F-8769-46A4-AD48-DF83FAD105AF}
 		{F3A45E1F-8427-4ABC-8ED2-064B8D5EF9ED} = {29257510-A7E2-4DB7-B7D0-2478CD2D9ED2}
+		{BC31D11C-3073-4353-94BC-B33FB0024E7B} = {24682B1F-8769-46A4-AD48-DF83FAD105AF}
+		{E29605BF-BC5A-4EE9-B235-77BBD82B81BB} = {BC31D11C-3073-4353-94BC-B33FB0024E7B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {401DA4EE-7D0E-42A1-88C4-60F8A28BE457}

@@ -2,13 +2,14 @@
 using Core.Models;
 using Core.Services;
 using Core.Services.Identity;
+using Core.Services.Messages;
 using Maestro.Core.Enums;
-using Maestro.Core.Messages;
 using Maestro.Employees.Data.Models;
 using Maestro.Employees.Models;
 using Maestro.Requests.Data;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
+using Server.Core.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -78,6 +79,18 @@ namespace Maestro.Employees.Services
 
             //TODO another message to statistics microservice with parameters EmployeeId 
 
+            var employee = await _context.Employees.Include(e => e.Work).FirstOrDefaultAsync(e => e.Id == work.EmployeeId);
+
+            var pastWork = employee.Work
+                .Where(x => x.Status == WorkStatus.Completed)
+                .Select(w => new Tuple<DateTime, DateTime>(w.StartDate.Value, w.EndDate.Value));
+
+            await _bus.Publish(new WorkCompletedMessage()
+            {
+                EmployeeId = employee.Id,
+                PastWorkPeriod = pastWork
+            });
+
             return await this._context.SaveChangesAsync() > 0
                 ? Result.Success
                 : Result.Failure(InternalServerError);
@@ -100,7 +113,7 @@ namespace Maestro.Employees.Services
 
             var employees = await _context.Employees.Include(e => e.Work).ToListAsync();
 
-            
+
             return new EmployeesOutputModel()
             {
                 Employees = _mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeOutputModel>>(employees)

@@ -1,6 +1,5 @@
-﻿using Maestro.Core.Messages;
+﻿using Core.Services.Messages;
 using Maestro.Employees.Data.Models;
-using Maestro.Employees.Services;
 using Maestro.Requests.Data;
 using MassTransit;
 using System;

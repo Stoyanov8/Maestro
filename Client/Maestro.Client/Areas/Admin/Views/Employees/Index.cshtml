@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<EmployeeInformationOutputModel>
 
-
+<h2>Employees</h2>
 <table class="table table-dark">
     <thead>
         <tr>
@@ -8,6 +8,7 @@
             <th scope="col">Last Name</th>
             <th scope="col">Current tasks</th>
             <th scope="col">Employee since</th>
+            <th scope="col">Average time to complete request</th>
         </tr>
     </thead>
     <tbody>
@@ -18,6 +19,14 @@
                 <td>@m.LastName</td>
                 <td>@m.CurrentWorkCount</td>
                 <td>@m.EmployeeSince</td>
+                @if (m.AverageWorkTime.HasValue)
+                {
+                    <td>@m.AverageWorkTime.Value.Days days, @m.AverageWorkTime.Value.Hours hours, @m.AverageWorkTime.Value.Minutes minutes, @m.AverageWorkTime.Value.Seconds seconds</td>
+                }
+                else
+                {
+                    <td>N/A</td>
+                }
             </tr>
         }
     </tbody>

@@ -1,4 +1,4 @@
-﻿namespace Maestro.Core.Messages
+﻿namespace Core.Services.Messages
 {
     public class RequestCreatedMessage
     {

@@ -18,11 +18,15 @@ namespace Maestro.Employees.Gateway.Controllers
     {
         private readonly IEmployeeService _employeeService;
         private readonly IIdentityService _identityService;
+        private readonly IStatisticsService _statisticsService;
 
-        public EmployeesController(IEmployeeService employeeService, IIdentityService identityService)
+        public EmployeesController(IEmployeeService employeeService,
+            IIdentityService identityService,
+            IStatisticsService statisticsService)
         {
             _employeeService = employeeService;
             _identityService = identityService;
+            _statisticsService = statisticsService;
         }
 
         [Authorize(Roles = AdministratorRole)]
@@ -32,22 +36,27 @@ namespace Maestro.Employees.Gateway.Controllers
         {
             var outputEmployees = await _employeeService.GetEmployees();
 
-            var userInfo = await _identityService.GetAllIn(new UsersIdInputModel { Ids = outputEmployees.Employees.Select(e => e.UserId) });
+            var averageTimeStatistics = _statisticsService.GetAllAverageEmployeeTime();
+            var userInfo = _identityService.GetAllIn(new UsersIdInputModel { Ids = outputEmployees.Employees.Select(e => e.UserId) });
+
+            await Task.WhenAll(averageTimeStatistics, userInfo);
 
             var empdict = outputEmployees.Employees.ToDictionary(x => x.UserId);
 
             var output = new List<EmployeeInformationOutputModel>();
 
-            foreach (var u in userInfo)
+            foreach (var u in userInfo.Result)
             {
                 var currentEmployee = empdict[u.UserId];
+
                 output.Add(new EmployeeInformationOutputModel
                 {
                     CurrentWorkCount = currentEmployee.CurrentWorkCount,
                     Id = currentEmployee.Id,
                     EmployeeSince = currentEmployee.EmployeeSince,
                     FirstName = u.FirstName,
-                    LastName = u.LastName
+                    LastName = u.LastName,
+                    AverageTime = averageTimeStatistics.Result.FirstOrDefault(avg => currentEmployee.Id == avg.EmployeeId)?.AverageTime ?? 0
                 });
             }
 

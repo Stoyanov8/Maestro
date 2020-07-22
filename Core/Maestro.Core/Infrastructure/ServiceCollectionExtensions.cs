@@ -28,7 +28,7 @@
             services
                 .AddDatabase<TDbContext>(configuration)
                 .AddApplicationSettings(configuration)
-                .AddTokenAuthentication(configuration)               
+                .AddTokenAuthentication(configuration)
                 .AddAutoMapperProfile(Assembly.GetCallingAssembly())
                 .AddControllers();
 
@@ -151,6 +151,7 @@
                     }));
                 })
                 .AddMassTransitHostedService();
+           
 
             services
                 .AddHangfire(config => config
@@ -158,10 +159,6 @@
                     .UseSimpleAssemblyNameTypeSerializer()
                     .UseRecommendedSerializerSettings()
                     .UseSqlServerStorage(configuration.GetDefaultConnectionString()));
-
-            services.AddHangfireServer();
-
-            //services.AddHostedService<MessagesHostedService>();
 
             return services;
         }

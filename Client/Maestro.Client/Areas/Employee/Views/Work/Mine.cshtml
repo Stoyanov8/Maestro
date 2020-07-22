@@ -2,6 +2,7 @@
 
 @if (Model.Count() > 0)
 {
+    <h2>My work</h2>
     <table class="table table-dark">
         <thead>
             <tr>
@@ -17,11 +18,13 @@
             {
                 var m = Model.ToList()[i];
 
-                <tr>
-                    <td>@i</td>
-                    <td>@m.Description</td>
-                    <td>@m.CategoryName</td>
-                    <td>@m.StatusText</td>
+            <tr>
+                <td>@i</td>
+                <td>@m.Description</td>
+                <td>@m.CategoryName</td>
+                <td>@m.StatusText</td>
+                @if (m.Status == Maestro.Core.Enums.WorkStatus.InProgress)
+                {
                     <td>
                         <a type="button" class="btn btn-primary" asp-action="CloseWork"
                            asp-controller="Work"
@@ -30,7 +33,8 @@
                             <i class="fas fa-thumbs-up"></i>
                         </a>
                     </td>
-                </tr>
+                }
+            </tr>
             }
         </tbody>
     </table>

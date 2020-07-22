@@ -50,6 +50,10 @@ namespace Maestro.Employees.Gateway
             services
                 .AddRefitClient<IEmployeeService>()
                 .WithConfiguration(serviceEndpoints.Employees);
+
+            services
+                .AddRefitClient<IStatisticsService>()
+                .WithConfiguration(serviceEndpoints.Statistics);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

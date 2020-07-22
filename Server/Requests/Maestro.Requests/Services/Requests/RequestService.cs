@@ -2,8 +2,7 @@
 using Core.Models;
 using Core.Services;
 using Core.Services.Identity;
-using Maestro.Core.Extensions;
-using Maestro.Core.Messages;
+using Core.Services.Messages;
 using Maestro.Requests.Data;
 using Maestro.Requests.Data.Models;
 using Maestro.Requests.Models;

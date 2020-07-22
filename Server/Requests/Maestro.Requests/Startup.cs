@@ -35,6 +35,7 @@ namespace Maestro.Requests
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
             => app
                 .UseWebService(env)
-                .Initialize();
+                .Initialize()
+                .UseHangfire();
     }
 }
