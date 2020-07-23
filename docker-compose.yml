@@ -1,0 +1,95 @@
+version: "3.8"
+
+services:
+
+    data:
+        container_name: sqlserver
+        image: mcr.microsoft.com/mssql/server:2019-latest       
+        ports: 
+            - "1433:1433"
+        environment:
+            - ACCEPT_EULA=Y
+            - SA_PASSWORD=StoProcentaSigurnost
+        volumes: 
+            - sqldata:/var/opt/mssql 
+        networks: 
+            - maestro-network
+    
+  
+    identity:
+        container_name: identity
+        build:
+            context: ./Server/Identity
+            dockerfile: ./Maestro.Identity/Dockerfile
+        ports: 
+            - "5002:80"
+        env_file: Core/Maestro.Core/Common.env
+        environment:
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=MaestroIdentityDatabase;User Id=sa; Password=StoProcentaSigurnost;MultipleActiveResultSets=true
+        restart: on-failure
+        volumes:
+            - ./.aspnet/identity/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+        networks: 
+            - maestro-network
+        depends_on:
+            - data
+            
+    employees:
+        container_name: employees
+        build:
+            context: ./Server/Employees
+            dockerfile: ./Maestro.Employees/Dockerfile
+        ports: 
+            - "5008:80"
+        env_file: Core/Maestro.Core/Common.env
+        environment:
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=MaestroEmployeesDatabase;User Id=sa; Password=StoProcentaSigurnost;MultipleActiveResultSets=true
+        restart: on-failure
+        volumes:
+            - ./.aspnet/employees/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+        networks: 
+            - maestro-network
+        depends_on:
+            - data
+            
+    requests:
+        container_name: requests
+        build:
+            context: ./Server/Requests
+            dockerfile: ./Maestro.Requests/Dockerfile
+        ports: 
+            - "5004:80"
+        env_file: Core/Maestro.Core/Common.env
+        environment:
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=MaestroRequestsDatabase;User Id=sa; Password=StoProcentaSigurnost;MultipleActiveResultSets=true
+        restart: on-failure
+        volumes:
+            - ./.aspnet/requests/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+        networks: 
+            - maestro-network
+        depends_on:
+            - data
+            
+    
+    statistics:
+        container_name: statistics
+        build:
+            context: ./Server/Statistics
+            dockerfile: ./Maestro.Statistics/Dockerfile
+        ports: 
+            - "5012:80"
+        env_file: Core/Maestro.Core/Common.env
+        environment:
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=MaestroStatisticsDatabase;User Id=sa; Password=StoProcentaSigurnost;MultipleActiveResultSets=true
+        restart: on-failure
+        volumes:
+            - ./.aspnet/statistics/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+        networks: 
+            - maestro-network
+        depends_on:
+            - data
+networks:
+    maestro-network:
+
+volumes:
+    sqldata:

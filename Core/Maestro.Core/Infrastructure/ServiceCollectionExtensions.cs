@@ -29,6 +29,7 @@
                 .AddDatabase<TDbContext>(configuration)
                 .AddApplicationSettings(configuration)
                 .AddTokenAuthentication(configuration)
+                .AddHealth(configuration)
                 .AddAutoMapperProfile(Assembly.GetCallingAssembly())
                 .AddControllers();
 
@@ -110,20 +111,20 @@
 
 
 
-        //public static IServiceCollection AddHealth(
-        //    this IServiceCollection services,
-        //    IConfiguration configuration)
-        //{
-        //    var healthChecks = services.AddHealthChecks();
+        public static IServiceCollection AddHealth(
+            this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            var healthChecks = services.AddHealthChecks();
 
-        //    healthChecks
-        //        .AddSqlServer(configuration.GetDefaultConnectionString());
+            healthChecks
+                .AddSqlServer(configuration.GetDefaultConnectionString());
 
-        //    healthChecks
-        //        .AddRabbitMQ(rabbitConnectionString: "amqp://rabbitmq:rabbitmq@rabbitmq/");
+            healthChecks
+                .AddRabbitMQ(rabbitConnectionString: "amqp://rabbitmq:rabbitmq@rabbitmq/");
 
-        //    return services;
-        //}
+            return services;
+        }
 
         public static IServiceCollection AddMessaging(
             this IServiceCollection services,
