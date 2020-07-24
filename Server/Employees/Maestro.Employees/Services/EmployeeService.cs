@@ -38,18 +38,23 @@ namespace Maestro.Employees.Services
 
         public async Task<Result<EmployeeWorkOutputModel>> GetMyWork()
         {
-            var employee = await GetCurrentEmployee();
+            var employee = await GetCurrentEmployee();         
 
             return new EmployeeWorkOutputModel()
             {
-                Id = employee.Id,
-                Work = _mapper.Map<IEnumerable<Work>, IEnumerable<WorkOutputModel>>(employee.Work ?? Enumerable.Empty<Work>())
+                Id = employee?.Id,
+                Work = _mapper.Map<IEnumerable<Work>, IEnumerable<WorkOutputModel>>(employee?.Work ?? Enumerable.Empty<Work>())
             };
         }
 
         public async Task<Result> TakeWork(TakeWorkInputModel input)
         {
             var employee = await GetCurrentEmployee();
+
+            if(employee == null)
+            {
+                return Result.Failure("User is not employee");
+            }
 
             var work = await _context.Work.FirstOrDefaultAsync(w => w.Id == input.Id);
 
