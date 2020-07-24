@@ -12,10 +12,10 @@ Maestro is web based solution, build to fullfil the requirements for Software Un
  - User
 
 
-Everyone can register in the website using the register form. When the registration is successfull they become an :
+Everyone can register in the website using the register form. When the registration is successfull they become :
 
 ### User 
-Users can create new request in "New request" page. They hae to give some description, and category.
+Users can create new request in "New request" page. They have to give some description, and category.
 They can also track the progress in the "My requests" tab.
 
 ### Administrator 
@@ -30,6 +30,7 @@ In Employees page, the Admin sees a list of all the Employees, some basic inform
 
 
 ### Employee 
+ Logging as administrator you should be able to see the "Employee Panel"
  An Employee can see a list of all requests in "Available Work" page. There, using the button they can take this work.
  Once taken, the work will be visualized in "My work" page. From there the employee can close the work, thus completing the request.
 
