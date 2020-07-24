@@ -5,10 +5,10 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["Server/Employees/Maestro.Employees/Maestro.Employees.csproj", "Server/Employees/Maestro.Employees/"]
-COPY ["Server/Server.Core/Server.Core.csproj", "Server/Server.Core/"]
-COPY ["Core/Maestro.Core/Maestro.Core.csproj", "Core/Maestro.Core/"]
-RUN dotnet restore "Server/Employees/Maestro.Employees/Maestro.Employees.csproj"
+COPY ["./Server/Employees/Maestro.Employees/Maestro.Employees.csproj", "Server/Employees/Maestro.Employees/"]
+COPY ["./Server/Server.Core/Server.Core.csproj", "Server/Server.Core/"]
+COPY ["./Core/Maestro.Core/Maestro.Core.csproj", "Core/Maestro.Core/"]
+RUN dotnet restore "./Server/Employees/Maestro.Employees/Maestro.Employees.csproj"
 COPY . .
 WORKDIR "/src/Server/Employees/Maestro.Employees"
 RUN dotnet build "Maestro.Employees.csproj" -c Release -o /app/build

@@ -13,7 +13,7 @@ using static Core.Constants.Roles;
 
 namespace Maestro.Employees.Gateway.Controllers
 {
-
+    [Authorize(Roles = AdministratorRole)]
     public class EmployeesController : ApiController
     {
         private readonly IEmployeeService _employeeService;
@@ -29,7 +29,7 @@ namespace Maestro.Employees.Gateway.Controllers
             _statisticsService = statisticsService;
         }
 
-        [Authorize(Roles = AdministratorRole)]
+
         [HttpGet]
         [Route(nameof(GetEmployees))]
         public async Task<IEnumerable<EmployeeInformationOutputModel>> GetEmployees()

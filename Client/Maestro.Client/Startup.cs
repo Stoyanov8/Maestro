@@ -76,7 +76,6 @@ namespace Client
             }
 
             app
-                .UseHttpsRedirection()
                 .UseStaticFiles()
                 .UseRouting()
                 .UseJwtCookieAuthentication()

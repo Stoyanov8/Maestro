@@ -1,11 +1,17 @@
-﻿using Maestro.Employees.Models;
+﻿using Core.Constants;
+using Core.Services.Controllers;
+using Maestro.Employees.Models;
 using Maestro.Employees.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
+using static Core.Constants.Roles;
+
 namespace Maestro.Employees.Controllers
 {
-    public class EmployeeController : BaseController
+    [Authorize(Roles = AdministratorRole)]
+    public class EmployeeController : ApiController
     {
         private readonly IEmployeeService _employeeService;
 

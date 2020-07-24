@@ -9,23 +9,37 @@ services:
             - "1433:1433"
         environment:
             - ACCEPT_EULA=Y
-            - SA_PASSWORD=StoProcentaSigurnost
+            - SA_PASSWORD=yourStrongPassword12!@
         volumes: 
             - sqldata:/var/opt/mssql 
         networks: 
             - maestro-network
     
+    messages:
+        container_name: rabbitmq
+        image: rabbitmq:3-management
+        ports:
+            - "15672:15672"
+            - "5672:5672"
+        hostname: "rabbitmq"
+        environment:
+            - RABBITMQ_ERLANG_COOKIE=Rand0mR4bbitMqCo0k1e
+            - RABBITMQ_DEFAULT_USER=rabbitmq
+            - RABBITMQ_DEFAULT_PASS=rabbitmq
+        networks: 
+            - maestro-network
+  
   
     identity:
         container_name: identity
         build:
-            context: ./Server/Identity
-            dockerfile: ./Maestro.Identity/Dockerfile
+            context: ./
+            dockerfile: ./Server/Identity/Maestro.Identity/Dockerfile
         ports: 
             - "5002:80"
         env_file: Core/Maestro.Core/Common.env
         environment:
-            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=MaestroIdentityDatabase;User Id=sa; Password=StoProcentaSigurnost;MultipleActiveResultSets=true
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=MaestroIdentityDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
         restart: on-failure
         volumes:
             - ./.aspnet/identity/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
@@ -37,13 +51,13 @@ services:
     employees:
         container_name: employees
         build:
-            context: ./Server/Employees
-            dockerfile: ./Maestro.Employees/Dockerfile
+            context: ./
+            dockerfile: ./Server/Employees/Maestro.Employees/Dockerfile
         ports: 
             - "5008:80"
         env_file: Core/Maestro.Core/Common.env
         environment:
-            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=MaestroEmployeesDatabase;User Id=sa; Password=StoProcentaSigurnost;MultipleActiveResultSets=true
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=MaestroEmployeesDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
         restart: on-failure
         volumes:
             - ./.aspnet/employees/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
@@ -55,13 +69,13 @@ services:
     requests:
         container_name: requests
         build:
-            context: ./Server/Requests
-            dockerfile: ./Maestro.Requests/Dockerfile
+            context: ./
+            dockerfile: ./Server/Requests/Maestro.Requests/Dockerfile
         ports: 
             - "5004:80"
         env_file: Core/Maestro.Core/Common.env
         environment:
-            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=MaestroRequestsDatabase;User Id=sa; Password=StoProcentaSigurnost;MultipleActiveResultSets=true
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=MaestroRequestsDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
         restart: on-failure
         volumes:
             - ./.aspnet/requests/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
@@ -74,13 +88,13 @@ services:
     statistics:
         container_name: statistics
         build:
-            context: ./Server/Statistics
-            dockerfile: ./Maestro.Statistics/Dockerfile
+            context: ./
+            dockerfile: ./Server/Statistics/Maestro.Statistics/Dockerfile
         ports: 
             - "5012:80"
         env_file: Core/Maestro.Core/Common.env
         environment:
-            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=MaestroStatisticsDatabase;User Id=sa; Password=StoProcentaSigurnost;MultipleActiveResultSets=true
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=MaestroStatisticsDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
         restart: on-failure
         volumes:
             - ./.aspnet/statistics/DataProtection-Keys:/root/.aspnet/DataProtection-Keys

@@ -2,10 +2,14 @@
 using Core.Services.Controllers;
 using Maestro.Employees.Models;
 using Maestro.Employees.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
+using static Core.Constants.Roles;
 
 namespace Maestro.Employees.Controllers
 {
+    [Authorize(Roles = EmployeeRole)]
     public class WorkController : ApiController
     {
         private readonly IEmployeeService _employeeService;
